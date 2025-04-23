@@ -38,11 +38,12 @@ public class ItemController(IItemService itemService) : BaseController
         => Ok(await _itemService.Get(pageIndex, pageSize, search, category, priority, sortBy, ascending));
 
     /// <summary>
-    /// add a item
+    /// add a item. Only accessible by Admins.
     /// </summary>
     /// <param name="request"></param>
     /// <param name="token"></param>
     /// <returns></returns>
+    [Authorize(Roles = "Admin")]
     [HttpPost]
     [SwaggerResponse(201, "Item added successfully.", typeof(ItemDTO))]
     [SwaggerResponse(400, "Invalid request.")]
@@ -50,12 +51,12 @@ public class ItemController(IItemService itemService) : BaseController
         => Ok(await _itemService.Add(request, token));
 
     /// <summary>
-    /// update a item
+    /// update a item. Only accessible by Admins.
     /// </summary>
     /// <param name="request"></param>
     /// <param name="token"></param>
     /// <returns></returns>
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     [HttpPut]
     [SwaggerResponse(200, "Item updated successfully.", typeof(ItemDTO))]
     [SwaggerResponse(400, "Invalid request.")]
@@ -64,12 +65,12 @@ public class ItemController(IItemService itemService) : BaseController
         => Ok(await _itemService.Update(request, token));
 
     /// <summary>
-    /// update task status
+    /// update task status. Only accessible by Admins.
     /// </summary>
     /// <param name="request"></param>
     /// <param name="token"></param>
     /// <returns></returns>
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     [HttpPut("UpdateStatus")]
     [SwaggerResponse(200, "Item Status updated successfully.", typeof(ItemDTO))]
     [SwaggerResponse(400, "Invalid request.")]
@@ -78,12 +79,12 @@ public class ItemController(IItemService itemService) : BaseController
         => Ok(await _itemService.UpdateTaskStatus(request, token));
 
     /// <summary>
-    /// delete a item by id
+    /// delete a item by id. Only accessible by Admins.
     /// </summary>
     /// <param name="id"></param>
     /// <param name="token"></param>
     /// <returns></returns>
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     [HttpDelete("{id}")]
     [SwaggerResponse(200, "Item deleted successfully.")]
     [SwaggerResponse(404, "Item not found.")]

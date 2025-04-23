@@ -1,0 +1,32 @@
+name: Package
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "CleanArchitecture.nuspec"
+
+jobs:
+  publish:
+    name: Publish to NuGet.org
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+        name: Checkout code
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.x'
+
+      - name: Restore NuGet packages
+        run: dotnet restore
+
+      - name: Pack the project
+        run: dotnet pack --configuration Release -o ./nupkg
+
+      - name: Push the package to NuGet.org
+        run: dotnet nuget push ./nupkg/CleanArchitecture.1.0.0.nupkg --api-key ${{secrets.NUGET_API_KEY}} --source https://api.nuget.org/v3/index.json --skip-duplicate

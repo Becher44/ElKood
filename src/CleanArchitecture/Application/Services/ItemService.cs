@@ -27,21 +27,20 @@ bool ascending = true)
             (string.IsNullOrEmpty(category) || x.Category == category) &&
             (string.IsNullOrEmpty(priority.ToString()) || x.Priority == priority);
 
-        Func<IQueryable<Item>, IOrderedQueryable<Item>> orderBy = query =>
+
+        Expression<Func<Item, object>> orderByExpression = sortBy?.ToLower() switch
         {
-            return sortBy?.ToLower() switch
-            {
-                "category" => ascending ? query.OrderBy(x => x.Category) : query.OrderByDescending(x => x.Category),
-                "priority" => ascending ? query.OrderBy(x => x.Priority) : query.OrderByDescending(x => x.Priority),
-                _ => ascending ? query.OrderBy(x => x.Title) : query.OrderByDescending(x => x.Title)
-            };
+            "category" => x => x.Category,
+            "priority" => x => x.Priority,
+            _ => x => x.Title
         };
 
         var items = await _unitOfWork.ItemRepository.ToPagination(
             pageIndex: pageIndex,
             pageSize: pageSize,
             filter: filter,
-            orderBy: x => x.Title,
+            orderBy: orderByExpression,
+            ascending: ascending,
             selector: x => new ItemDTO
             {
                 Id = x.Id,

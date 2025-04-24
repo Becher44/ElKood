@@ -117,7 +117,7 @@ public class TokenService(AppSettings appSettings,
             checkToken.Expires = expires;
             checkToken.Created = DateTime.UtcNow;
             await _unitOfWork.ExecuteTransactionAsync(
-                () => _unitOfWork.RefreshTokenRepository.Update(refreshToken), cancellationToken);
+                () => _unitOfWork.RefreshTokenRepository.UpdateAsync(refreshToken), cancellationToken);
 
         }
         //if refresh token is exist and expired, then delete it and add new one

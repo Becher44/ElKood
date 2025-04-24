@@ -12,6 +12,7 @@ public class UserController(IUserService userService) : BaseController
 
     /// <summary>
     /// Retrieves a list of all users. Only accessible by Admins.
+    /// It retrieve only the user created by identity
     /// </summary>
     /// <param name="cancellationToken">Cancellation token for the operation.</param>
     [HttpGet]
@@ -25,12 +26,12 @@ public class UserController(IUserService userService) : BaseController
     }
 
     /// <summary>
-    /// Updates the details of a user.
+    /// Updates the details of a user. Only accessible by Admins.
     /// </summary>
     /// <param name="request">Details to update.</param>
     /// <param name="cancellationToken">Cancellation token for the operation.</param>
     [HttpPut]
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     [SwaggerResponse(204, "User updated successfully.")]
     [SwaggerResponse(400, "Invalid request.")]
     [SwaggerResponse(401, "Unauthorized access.")]
@@ -41,12 +42,12 @@ public class UserController(IUserService userService) : BaseController
     }
 
     /// <summary>
-    /// Deletes a user by their ID.
+    /// Deletes a user by their ID. Only accessible by Admins.
     /// </summary>
     /// <param name="userId">The ID of the user to delete.</param>
     /// <param name="cancellationToken">Cancellation token for the operation.</param>
     [HttpDelete("{userId}")]
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     [SwaggerResponse(204, "User deleted successfully.")]
     [SwaggerResponse(404, "User not found.")]
     [SwaggerResponse(401, "Unauthorized access.")]

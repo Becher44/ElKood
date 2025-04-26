@@ -73,9 +73,9 @@ dotnet new cleanarch -n template-project
 Access the API via:
 
 - Docker: `http://localhost:3001/swagger/index.html`
-  - Health check: `http://localhost:3001/health` & `http://localhost:3001/healthcheck-ui`
+
 - Local: `http://localhost:5240/swagger/index.html`
-  - Health check: `http://localhost:5240/health` & `http://localhost:5240/healthcheck-ui`
+
 
 ### Pre-Existed User
 - Admin User Info

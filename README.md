@@ -78,14 +78,15 @@ Access the API via:
   - Health check: `http://localhost:5240/health` & `http://localhost:5240/healthcheck-ui`
 
 ### Pre-Existed User
+- Admin User Info
+  - UserName: admin
+  - Email: dmin@gmail.com
+  - Password: P@ssw0rd
+  - Role: Role.Admin
 
-- UserName : admin
-- Email: dmin@gmail.com
-- Password: P@ssw0rd
-- Role: Role.Admin
-
-- UserName user,
-- Email user@gmail.com
-- Password P@ssw0rd
-- Role  Role.User
+- Normal User Info
+  - UserName: user,
+  - Email: user@gmail.com
+  - Password: P@ssw0rd
+  - Role:  Role.User
           

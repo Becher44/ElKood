@@ -38,7 +38,9 @@ This project serves as a ElKood-Test for building a Clean Architecture Web API i
 ### Installation
 
 1. Clone the repository:
-    ```git clone https://github.com/Becher44/ElKood    
+
+    ```bash
+    git clone https://github.com/Becher44/ElKood    
     ```
 
 2. Build and run:
